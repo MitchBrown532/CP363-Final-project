@@ -158,6 +158,26 @@ SELECT
     ,FinalGrade
 FROM StudentGrades;
 
+
+CREATE TABLE Enrollment (
+    EnrollmentID INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    StudentID INT,
+    CourseID INT,
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID) ON DELETE CASCADE,
+    FOREIGN KEY (CourseID) REFERENCES Course(CourseID) ON DELETE CASCADE
+);
+CREATE OR REPLACE VIEW VEnrollment
+(
+	 EnrollmentID
+	,StudentID
+	,CourseID
+) AS
+SELECT
+	 EnrollmentID
+	,StudentID
+	,CourseID
+FROM Enrollment;
+
 -- Set up Foreign Keys
 ALTER TABLE Student
 ADD COLUMN Student_Info_ID Integer NOT NULL UNIQUE,
@@ -170,3 +190,4 @@ ADD COLUMN Instructor_Info_ID Integer NOT NULL UNIQUE,
 ADD CONSTRAINT Instructor_Info
 FOREIGN KEY (Instructor_Info_ID)
 REFERENCES PersonalInfo(InfoID);
+
