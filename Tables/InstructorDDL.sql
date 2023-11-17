@@ -11,14 +11,22 @@ CREATE TABLE Instructor (
 	Surname Varchar(40) NOT NULL,
 );
 
+ALTER TABLE Student
+ADD COLUMN Instructor_Info_ID Integer NOT NULL UNIQUE,
+ADD CONSTRAINT Student_Info
+FOREIGN KEY (Instructor_Info_ID)
+REFERENCES PersonalInfo(InfoID);
+
 CREATE OR REPLACE VIEW VInstructor 
 (
 	 InstructorID
 	,FirstName
 	,Surname
+	,Instructor_Info_ID
 ) AS
 SELECT
 	 InstructorID
 	,FirstName
 	,Surname
+	,Instructor_Info_ID
 FROM Instructor;
