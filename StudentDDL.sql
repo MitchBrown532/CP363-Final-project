@@ -7,6 +7,7 @@ DROP TABLE Student;
 
 CREATE TABLE Student (
 	StudentID Integer NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+	InfoID Integer NOT NULL UNIQUE FOREIGN KEY REFERENCES PersonalInfo(InfoID),
 	FirstName Varchar(40) NOT NULL,
 	Surname Varchar(40) NOT NULL,
 	Degree Varchar(40) NOT NULL,
