@@ -17,8 +17,8 @@ CREATE TABLE PersonalInfo (
     PhoneNum Varchar(40) NOT NULL,
     Email Varchar(40) NOT NULL,
     EmergencyCt Varchar(40) NOT NULL,
-    FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
-    FOREIGN KEY (InstructorID) REFERENCES Instructor(InstructorID)
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID) ON DELETE CASCADE,
+    FOREIGN KEY (InstructorID) REFERENCES Instructor(InstructorID) ON DELETE CASCADE
 );
 
 

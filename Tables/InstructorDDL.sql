@@ -11,7 +11,7 @@ CREATE TABLE Instructor (
 	Surname Varchar(40) NOT NULL,
 );
 
-ALTER TABLE Student
+ALTER TABLE Instructor
 ADD COLUMN Instructor_Info_ID Integer NOT NULL UNIQUE,
 ADD CONSTRAINT Student_Info
 FOREIGN KEY (Instructor_Info_ID)
