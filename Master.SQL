@@ -190,8 +190,7 @@ INSERT INTO Student (FirstName, Surname, Degree, Major, Minor, AdmissionYr, GPA)
 VALUES
 ('John', 'Doe', 'Bachelor of Science', 'Computer Science', 'Mathematics', 2020, 3.75),
 ('Jane', 'Smith', 'Bachelor of Arts', 'English', 'History', 2019, 3.85),
-('Michael', 'Johnson', 'Bachelor of Engineering', 'Mechanical Engineering', NULL, 2021, 3.60),
-('Emily', 'Williams', 'Bachelor of Business Administration', 'Marketing', NULL, 2018, 3.90);
+('Michael', 'Johnson', 'Bachelor of Engineering', 'Mechanical Engineering', NULL, 2021, 3.60);
 
 INSERT INTO Instructor (FirstName, Surname)
 VALUES
@@ -215,5 +214,20 @@ VALUES
 (3, 'MECH301', 'Thermodynamics'),
 (1, 'CS201', 'Data Structures and Algorithms');
 
+INSERT INTO Enrollment (StudentID, CourseID)
+VALUES
+(1, 1),
+(1, 4),
+(2, 2),
+(2, 3),
+(3, 3),
+(3, 1);
 
-
+INSERT INTO StudentGrades (StudentID, CourseID, MidtermOne, MidtermTwo, ProjectPres, ProjectRpt, FinalExam, FinalGrade)
+VALUES
+(1, 1, 85.5, 90.0, 92.5, 88.0, 95.0, 91.2),
+(1, 4, 88.0, 91.5, 89.0, 87.5, 94.0, 90.5),
+(2, 2, 78.0, 82.5, 85.0, 80.5, 88.0, 82.8),
+(2, 3, 70.0, 84.5, 86.0, 80.5, 88.0, 82.8),
+(3, 3, 92.0, 88.5, 91.5, 90.0, 93.0, 91.8),
+(3, 1, 87.5, 90.0, 88.0, 86.5, 92.5, 89.8);
