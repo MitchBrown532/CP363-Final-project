@@ -1,4 +1,4 @@
--- Run Commands in this order:
+-- Run Commands in this order, or simply copy & paste this doc into your CMD:
 -- Create Database:
 CREATE DATABASE SchoolDB;
 USE SchoolDB;
@@ -186,26 +186,28 @@ SELECT
 FROM StudentGrades;
 
 -- Insert Data:
-INSERT INTO Student (FirstName, Surname, Degree, Major, Minor, AdmissionYr, GPA)
-VALUES
-('John', 'Doe', 'Bachelor of Science', 'Computer Science', 'Mathematics', 2020, 3.75),
-('Jane', 'Smith', 'Bachelor of Arts', 'English', 'History', 2019, 3.85),
-('Michael', 'Johnson', 'Bachelor of Engineering', 'Mechanical Engineering', NULL, 2021, 3.60);
-
-INSERT INTO Instructor (FirstName, Surname)
-VALUES
-('Professor', 'Anderson'),
-('Dr.', 'Davis'),
-('Ms.', 'Clark');
 
 INSERT INTO PersonalInfo (StudentID, InstructorID, Gender, Address, City, Province, Country, PhoneNum, Email, EmergencyCt)
 VALUES
-(1, NULL, 'Male', '123 Main St', 'Anytown', 'Anyprovince', 'USA', '555-1234', 'john.doe@example.com', 'John's Emergency Contact'),
-(2, NULL, 'Female', '456 Oak St', 'Othercity', 'Otherprovince', 'USA', '555-5678', 'jane.smith@example.com', 'Jane's Emergency Contact'),
-(3, NULL, 'Male', '789 Pine St', 'Anothercity', 'Anotherprovince', 'USA', '555-9876', 'michael.johnson@example.com', 'Michael's Emergency Contact'),
-(NULL, 1, 'Female', '987 Elm St', 'Somewhere', 'Someprovince', 'USA', '555-4321', 'prof.anderson@example.com', 'Professor Anderson's Emergency Contact'),
-(NULL, 2, 'Male', '654 Birch St', 'Nowhere', 'Noprovince', 'USA', '555-8765', 'dr.davis@example.com', 'Dr. Davis's Emergency Contact'),
-(NULL, 3, 'Female', '321 Cedar St', 'Anywhere', 'Anyprovince', 'USA', '555-5678', 'ms.clark@example.com', 'Ms. Clark's Emergency Contact');
+(NULL, NULL, 'Male', '123 Main St', 'Anytown', 'Anyprovince', 'USA', '555-1234', 'john.doe@example.com', 'John Emergency Contact'),
+(NULL, NULL, 'Female', '456 Oak St', 'Othercity', 'Otherprovince', 'USA', '555-5678', 'jane.smith@example.com', 'Jane Emergency Contact'),
+(NULL, NULL, 'Male', '789 Pine St', 'Anothercity', 'Anotherprovince', 'USA', '555-9876', 'michael.johnson@example.com', 'Michael Emergency Contact'),
+(NULL, NULL, 'Female', '987 Elm St', 'Somewhere', 'Someprovince', 'USA', '555-4321', 'prof.anderson@example.com', 'Professor Anderson Emergency Contact'),
+(NULL, NULL, 'Male', '654 Birch St', 'Nowhere', 'Noprovince', 'USA', '555-8765', 'dr.davis@example.com', 'Dr. Davis Emergency Contact'),
+(NULL, NULL, 'Female', '321 Cedar St', 'Anywhere', 'Anyprovince', 'USA', '555-5678', 'ms.clark@example.com', 'Ms. Clark Emergency Contact');
+
+
+INSERT INTO Student (FirstName, Surname, Degree, Major, Minor, AdmissionYr, GPA, Student_Info_ID)
+VALUES
+('John', 'Doe', 'Bachelor of Science', 'Computer Science', 'Mathematics', 2020, 3.75, 1),
+('Jane', 'Smith', 'Bachelor of Arts', 'English', 'History', 2019, 3.85, 2),
+('Michael', 'Johnson', 'Bachelor of Engineering', 'Mechanical Engineering', NULL, 2021, 3.60, 3);
+
+INSERT INTO Instructor (FirstName, Surname, Instructor_Info_ID)
+VALUES
+('Professor', 'Anderson', 4),
+('Dr.', 'Davis', 5),
+('Ms.', 'Clark', 6);
 
 INSERT INTO Course (InstructorID, CourseCode, CourseName)
 VALUES
@@ -231,3 +233,4 @@ VALUES
 (2, 3, 70.0, 84.5, 86.0, 80.5, 88.0, 82.8),
 (3, 3, 92.0, 88.5, 91.5, 90.0, 93.0, 91.8),
 (3, 1, 87.5, 90.0, 88.0, 86.5, 92.5, 89.8);
+
