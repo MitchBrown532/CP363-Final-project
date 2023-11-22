@@ -6,36 +6,37 @@ SHOW TABLES;
 
 -- Show all data from each table
 SELECT *
-FROM VStudent
+FROM VStudent;
 
 SELECT *
-FROM VInstructor
+FROM VInstructor;
 
 SELECT *
-FROM VCourse
+FROM VCourse;
 
 SELECT *
-FROM VPersonalInfo
+FROM VPersonalInfo;
 
 SELECT *
-FROM VStudentGrades
+FROM VStudentGrades;
 
--- Show info about students and instructor
+-- Show all students and instructors
 
 SELECT
 	 StudentID
 	,FirstName
 	,Surname
 FROM VStudent
-ORDER BY StudentID
+ORDER BY StudentID;
 
 SELECT
 	 InstructorID
 	,FirstName
 	,Surname
 FROM VInstructor
-ORDER BY InstructorID
+ORDER BY InstructorID;
 
+-- Show info of students and instructors
 SELECT
 	 s.StudentID
 	,s.FirstName
@@ -47,7 +48,7 @@ SELECT
 FROM VStudent s 
 	INNER JOIN VPersonalInfo i 
 		ON s.StudentID = i.StudentID
-ORDER BY s.StudentID
+ORDER BY s.StudentID;
 
 SELECT
 	 instor.InstructorID
@@ -60,25 +61,57 @@ SELECT
 FROM VInstructor instor 
 	INNER JOIN VPersonalInfo i 
 		ON instor.InstructorID = i.InstructorID
-ORDER BY instor.IntructorID
+ORDER BY instor.IntructorID;
 
 -- Check student courses and grades
 SELECT
-	 s.StudentID
-	,s.FirstName
-	,s.Surname
-	,c.CourseCode
-	,c.CourseName
-	,i.FirstName
-	,i.Surname
-FROM VStudent s 
-	INNER JOIN VCourseEnrollment e 
-		ON s.StudentID = e.StudentID
-	INNER JOIN VCourse c 
-		ON e.CourseID = c.CourseID 
-	INNER JOIN VInstructor i 
-		ON c.InstructorID = i.InstructorID
+    s.StudentID,
+    s.FirstName AS StudentFirstName,
+    s.Surname AS StudentSurname,
+    c.CourseCode,
+    c.CourseName,
+    i.FirstName AS InstructorFirstName,
+    i.Surname AS InstructorSurname
+FROM
+    VStudent s
+INNER JOIN VEnrollment e ON s.StudentID = e.StudentID
+INNER JOIN VCourse c ON e.CourseID = c.CourseID
+INNER JOIN VInstructor i ON c.InstructorID = i.InstructorID
+ORDER BY
+    s.StudentID;
+
 
 	
 
--- Add table for student enrollment since instructorID would be duplciated
+-- Find all courses a specific instructor is teaching 
+SELECT
+    i.FirstName,
+    i.Surname,
+    c.CourseCode,
+    c.CourseName
+FROM
+    VInstructor i
+JOIN VCourse c ON i.InstructorID = c.InstructorID
+WHERE
+    i.InstructorID = 1;
+
+
+-- Find a specific students grades
+SELECT
+    s.FirstName,
+    s.Surname,
+    c.CourseCode,
+    c.CourseName,
+    g.MidtermOne,
+    g.MidtermTwo,
+    g.ProjectPres,
+    g.ProjectRpt,
+    g.FinalExam,
+    g.FinalGrade
+FROM
+    VStudent s
+JOIN VEnrollment e ON s.StudentID = e.StudentID
+JOIN VCourse c ON e.CourseID = c.CourseID
+LEFT JOIN VStudentGrades g ON s.StudentID = g.StudentID AND c.CourseID = g.CourseID
+WHERE
+    s.StudentID = 1;

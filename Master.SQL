@@ -185,6 +185,26 @@ SELECT
     ,FinalGrade
 FROM StudentGrades;
 
+CREATE TABLE Enrollment (
+    EnrollmentID INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    StudentID INT,
+    CourseID INT,
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID) ON DELETE CASCADE,
+    FOREIGN KEY (CourseID) REFERENCES Course(CourseID) ON DELETE CASCADE
+);
+
+CREATE OR REPLACE VIEW VEnrollment
+(
+	 EnrollmentID
+	,StudentID
+	,CourseID
+) AS
+SELECT
+	 EnrollmentID
+	,StudentID
+	,CourseID
+FROM Enrollment;
+
 -- Insert Data:
 
 INSERT INTO PersonalInfo (StudentID, InstructorID, Gender, Address, City, Province, Country, PhoneNum, Email, EmergencyCt)
