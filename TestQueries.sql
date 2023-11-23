@@ -115,3 +115,6 @@ JOIN VCourse c ON e.CourseID = c.CourseID
 LEFT JOIN VStudentGrades g ON s.StudentID = g.StudentID AND c.CourseID = g.CourseID
 WHERE
     s.StudentID = 1;
+
+-- Delete to test integrity
+DELETE FROM Student WHERE StudentID = ;

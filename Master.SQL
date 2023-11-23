@@ -69,13 +69,13 @@ CREATE TABLE Enrollment (
 
 -- Set up Foreign Keys
 ALTER TABLE Student
-ADD COLUMN Student_Info_ID Integer NOT NULL UNIQUE,
+ADD COLUMN Student_Info_ID Integer UNIQUE,
 ADD CONSTRAINT Student_Info
 FOREIGN KEY (Student_Info_ID)
 REFERENCES PersonalInfo(InfoID);
 
 ALTER TABLE Instructor
-ADD COLUMN Instructor_Info_ID Integer NOT NULL UNIQUE,
+ADD COLUMN Instructor_Info_ID Integer UNIQUE,
 ADD CONSTRAINT Instructor_Info
 FOREIGN KEY (Instructor_Info_ID)
 REFERENCES PersonalInfo(InfoID);
@@ -185,14 +185,6 @@ SELECT
     ,FinalGrade
 FROM StudentGrades;
 
-CREATE TABLE Enrollment (
-    EnrollmentID INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
-    StudentID INT,
-    CourseID INT,
-    FOREIGN KEY (StudentID) REFERENCES Student(StudentID) ON DELETE CASCADE,
-    FOREIGN KEY (CourseID) REFERENCES Course(CourseID) ON DELETE CASCADE
-);
-
 CREATE OR REPLACE VIEW VEnrollment
 (
 	 EnrollmentID
@@ -205,29 +197,28 @@ SELECT
 	,CourseID
 FROM Enrollment;
 
+
 -- Insert Data:
+INSERT INTO Student (FirstName, Surname, Degree, Major, Minor, AdmissionYr, GPA)
+VALUES
+('John', 'Doe', 'Bachelor of Science', 'Computer Science', 'Mathematics', 2020, 3.75),
+('Jane', 'Smith', 'Bachelor of Arts', 'English', 'History', 2019, 3.85),
+('Michael', 'Johnson', 'Bachelor of Engineering', 'Mechanical Engineering', NULL, 2021, 3.60);
+
+INSERT INTO Instructor (FirstName, Surname)
+VALUES
+('Professor', 'Anderson'),
+('Dr.', 'Davis'),
+('Ms.', 'Clark');
 
 INSERT INTO PersonalInfo (StudentID, InstructorID, Gender, Address, City, Province, Country, PhoneNum, Email, EmergencyCt)
 VALUES
-(NULL, NULL, 'Male', '123 Main St', 'Anytown', 'Anyprovince', 'USA', '555-1234', 'john.doe@example.com', 'John Emergency Contact'),
-(NULL, NULL, 'Female', '456 Oak St', 'Othercity', 'Otherprovince', 'USA', '555-5678', 'jane.smith@example.com', 'Jane Emergency Contact'),
-(NULL, NULL, 'Male', '789 Pine St', 'Anothercity', 'Anotherprovince', 'USA', '555-9876', 'michael.johnson@example.com', 'Michael Emergency Contact'),
-(NULL, NULL, 'Female', '987 Elm St', 'Somewhere', 'Someprovince', 'USA', '555-4321', 'prof.anderson@example.com', 'Professor Anderson Emergency Contact'),
-(NULL, NULL, 'Male', '654 Birch St', 'Nowhere', 'Noprovince', 'USA', '555-8765', 'dr.davis@example.com', 'Dr. Davis Emergency Contact'),
-(NULL, NULL, 'Female', '321 Cedar St', 'Anywhere', 'Anyprovince', 'USA', '555-5678', 'ms.clark@example.com', 'Ms. Clark Emergency Contact');
-
-
-INSERT INTO Student (FirstName, Surname, Degree, Major, Minor, AdmissionYr, GPA, Student_Info_ID)
-VALUES
-('John', 'Doe', 'Bachelor of Science', 'Computer Science', 'Mathematics', 2020, 3.75, 1),
-('Jane', 'Smith', 'Bachelor of Arts', 'English', 'History', 2019, 3.85, 2),
-('Michael', 'Johnson', 'Bachelor of Engineering', 'Mechanical Engineering', NULL, 2021, 3.60, 3);
-
-INSERT INTO Instructor (FirstName, Surname, Instructor_Info_ID)
-VALUES
-('Professor', 'Anderson', 4),
-('Dr.', 'Davis', 5),
-('Ms.', 'Clark', 6);
+(1, NULL, 'Male', '123 Main St', 'Anytown', 'Anyprovince', 'USA', '555-1234', 'john.doe@example.com', 'John Emergency Contact'),
+(2, NULL, 'Female', '456 Oak St', 'Othercity', 'Otherprovince', 'USA', '555-5678', 'jane.smith@example.com', 'Jane Emergency Contact'),
+(3, NULL, 'Male', '789 Pine St', 'Anothercity', 'Anotherprovince', 'USA', '555-9876', 'michael.johnson@example.com', 'Michael Emergency Contact'),
+(NULL, 1, 'Female', '987 Elm St', 'Somewhere', 'Someprovince', 'USA', '555-4321', 'prof.anderson@example.com', 'Professor Anderson Emergency Contact'),
+(NULL, 2, 'Male', '654 Birch St', 'Nowhere', 'Noprovince', 'USA', '555-8765', 'dr.davis@example.com', 'Dr. Davis Emergency Contact'),
+(NULL, 3, 'Female', '321 Cedar St', 'Anywhere', 'Anyprovince', 'USA', '555-5678', 'ms.clark@example.com', 'Ms. Clark Emergency Contact');
 
 INSERT INTO Course (InstructorID, CourseCode, CourseName)
 VALUES
